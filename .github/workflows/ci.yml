@@ -9,20 +9,20 @@ on:
 jobs:
   validate:
     runs-on: ubuntu-latest
-                                                                                                                                                  
+                                                                                                                                                                                                                                                   
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Check required files exist
         run: |
-          test -f docker-compose.yml
+          test -f docker-compose.yaml
           test -f proxy/nginx.conf
           test -f app1/index.html
           test -f app2/index.html
 
       - name: Validate Docker Compose
-        run: docker compose -f docker-compose.yml config
+        run: docker compose -f docker-compose.yaml config
 
       - name: Validate NGINX config
         run: |
