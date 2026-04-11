@@ -9,7 +9,7 @@ on:
 jobs:
   validate:
     runs-on: ubuntu-latest
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -33,29 +33,29 @@ jobs:
           docker run --rm \
             -v ${{ github.workspace }}/proxy/nginx.test.conf:/etc/nginx/nginx.conf:ro \
             nginx:latest nginx -t
+           
+      - name: Start application stack
+        run: docker compose -f docker-compose.yaml up -d
 
-       name: Start application stack
-       run: docker compose -f docker-compose.yaml up -d
+      - name: wait for services
+        run: sleep 10
 
-     - name: wait for services
-       run: sleep 10
+      - name: Test main app
+        run: |
+          curl -f http://localhost | grep "My first DevOps Server"
 
-     - name: Test main app
-       run: |
-         curl -f http://localhost | grep "My first DevOps Server"
+      - name: Test app2 route
+        run: |
+          curl -f http://localhost/app2/ | grep "App 2 Running"
 
-     - name: Test app2 route
-       run: |
-         curl -f http://localhost/app2/ | grep "App 2 Running"
+      - name: show container status
+        if: always()
+        run: docker compose -f docker-compose.yaml ps
 
-     - name: show container status
-       if: always()
-       run: docker compose -f docker-compose.yaml ps
-
-     - name: show container logs
-       if: failure()
-       run: docker compose -f docker-compose.yaml logs
+      - name: show container logs
+        if: failure()
+        run: docker compose -f docker-compose.yaml logs
             
-     - name: Tear down stack
-       if: always()
-       run: docker compose -f docker-compose.yaml down
+      - name: Tear down stack
+        if: always()
+        run: docker compose -f docker-compose.yaml down
