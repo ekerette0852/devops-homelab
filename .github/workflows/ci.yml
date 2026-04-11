@@ -9,7 +9,7 @@ on:
 jobs:
   validate:
     runs-on: ubuntu-latest
-                                                                                                                                                                                                                                                   
+                                                                                                                                                                                                                                                                                                                                                      
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -26,6 +26,10 @@ jobs:
 
       - name: Validate NGINX config
         run: |
+          cp proxy/nginx.conf proxy/nginx.test.conf
+          sed -i 's/app1/127.0.0.1/g' proxy/nginx.test.conf
+          sed -i 's/app2/127.0.0.1/g' proxy/nginx.test.conf
+
           docker run --rm \
-            -v ${{ github.workspace }}/proxy/nginx.conf:/etc/nginx/nginx.conf:ro \
+            -v ${{ github.workspace }}/proxy/nginx.test.conf:/etc/nginx/nginx.conf:ro \
             nginx:latest nginx -t
