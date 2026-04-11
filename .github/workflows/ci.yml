@@ -9,7 +9,7 @@ on:
 jobs:
   validate:
     runs-on: ubuntu-latest
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -42,7 +42,7 @@ jobs:
 
       - name: Test main app
         run: |
-          curl -f http://localhost | grep "My first DevOps Server"
+          curl -f http://localhost | grep "My First DevOps Server"
 
       - name: Test app2 route
         run: |
