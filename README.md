@@ -1,4 +1,18 @@
-# DevOps Homelab: Multi-service Reverse Proxy with docker Compose
+![CI](https;//github.com/Ekerette0852/devops-homelab/actions/workflows/ci.yml/badge.svg)
+![CD](https://github.com/Ekerette0852/devops-homelab/actions/workflows/cd.yml/badge.svg)
+
+## published image
+_ Proxy image published to Github Container Registry
+- package: `ghcr.io/ekerette0852/devops-homelab/proxy:latest`
+                                                              
+# DevOps Homelab: Multi-service Reverse Proxy with Docker Compose
+
+## Features
+- Multi-service architecture (App1, App2)
+- NGINX reverse proxy (path-based routing)
+- Docker Compose orchestration
+- CI pipeline with GitHub Actions
+- CD pipeline publishing images to GitHub Container Registry
 
 ## Overview
 This project demonstratea a simple DevOps architecture using Docker Compose and NGINX as a reverse proxy.
